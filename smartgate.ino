@@ -1,35 +1,34 @@
-int sensorread = 0;
 int ldr = 6;
 int flag = 5;
-int buttonPushCounter = 0;
 int btn = 2;
 int x = 0 , guests = 0, i = 0;
+int sensorread = 0;
 int buttonState = 0;
 int lastButtonState = 0;
+int buttonPushCounter = 0;
 int buzzer = 7;
+
 void setup()
 {
-  pinMode(ldr, OUTPUT);
-  pinMode(flag, OUTPUT);
-  pinMode(buzzer, OUTPUT);
-  pinMode(btn, INPUT) ;
-  pinMode(A0, INPUT);
+  pinMode(ldr, OUTPUT);            // led room
+  pinMode(flag, OUTPUT);          // led laser
+  pinMode(buzzer, OUTPUT);       //buzzer variable
+  pinMode(btn, INPUT) ;         //button variabe
+  pinMode(A0, INPUT);          //LDR sensor
   Serial.begin(9600);
 }
+
 void loop() {
   buttonState = digitalRead(btn);
-  if (buttonState != lastButtonState)
-  {
-    if (buttonState == HIGH)
-    {
+  if (buttonState != lastButtonState){
+    if (buttonState == HIGH){
       buttonPushCounter++;
     }
     delay(50);
   }
 
   lastButtonState = buttonState;
-  if (buttonPushCounter % 2 != 0)
-  {
+  if (buttonPushCounter % 2 != 0){
     digitalWrite(ldr, LOW);
     digitalWrite(flag, HIGH);
     sensorread = analogRead(A0);
@@ -47,8 +46,7 @@ void loop() {
       digitalWrite(ldr, HIGH);
     }
   }
-  else if (buttonPushCounter % 2 == 0)
-  {
+  else if (buttonPushCounter % 2 == 0){
     i = 0;
     guests = 0;
     x = 0;
